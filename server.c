@@ -2341,7 +2341,7 @@ void fio_server_send_add_job(struct thread_data *td)
 
 void fio_server_send_start(struct thread_data *td)
 {
-	struct sk_out *sk_out = pthread_getspecific(sk_out_key);
+	struct sk_out fio_unused *sk_out = pthread_getspecific(sk_out_key);
 
 	assert(sk_out->sk != -1);
 

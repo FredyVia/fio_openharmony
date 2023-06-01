@@ -1974,7 +1974,7 @@ static void *thread_main(void *data)
 	 * another thread is checking its io_u's for overlap
 	 */
 	if (td_offload_overlap(td)) {
-		int res = pthread_mutex_lock(&overlap_check);
+		res = pthread_mutex_lock(&overlap_check);
 		assert(res == 0);
 	}
 	td_set_runstate(td, TD_FINISHING);

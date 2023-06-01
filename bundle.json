@@ -1,0 +1,32 @@
+{
+  "name": "@ohos/fio",
+  "description": "fio",
+  "version": "3.2",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+      "destPath": "third_party/fio"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+      "name": "fio",
+      "subsystem": "thirdparty",
+      "syscap": [],
+      "features": [],
+      "adapted_system_type": ["small", "standard"],
+      "rom": "10KB",
+      "ram": "10KB",
+      "deps": {
+          "components": [],
+          "third_party": []
+      },
+      "build": {
+          "sub_component": [
+              "//third_party/fio:fio"
+          ],
+          "inner_kits": [],
+          "test": []
+      }
+  }
+}

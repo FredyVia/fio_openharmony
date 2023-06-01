@@ -103,8 +103,7 @@ static void zone_lock(struct thread_data *td, const struct fio_file *f,
 		      struct fio_zone_info *z)
 {
 	struct zoned_block_device_info *zbd = f->zbd_info;
-	uint32_t nz = z - zbd->zone_info;
-
+	uint32_t fio_unused nz = z - zbd->zone_info;
 	/* A thread should never lock zones outside its working area. */
 	assert(f->min_zone <= nz && nz < f->max_zone);
 
@@ -391,7 +390,7 @@ static int zbd_reset_zones(struct thread_data *td, struct fio_file *f,
 			   struct fio_zone_info *const ze)
 {
 	struct fio_zone_info *z;
-	const uint64_t min_bs = td->o.min_bs[DDIR_WRITE];
+	const uint64_t fio_unused min_bs = td->o.min_bs[DDIR_WRITE];
 	int res = 0;
 
 	assert(min_bs);
@@ -1666,7 +1665,7 @@ unlock:
 static void zbd_put_io(struct thread_data *td, const struct io_u *io_u)
 {
 	const struct fio_file *f = io_u->file;
-	struct zoned_block_device_info *zbd_info = f->zbd_info;
+	struct zoned_block_device_info fio_unused *zbd_info = f->zbd_info;
 	struct fio_zone_info *z;
 
 	assert(zbd_info);

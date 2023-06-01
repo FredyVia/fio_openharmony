@@ -342,7 +342,7 @@ enum fio_q_status td_io_queue(struct thread_data *td, struct io_u *io_u)
 	 * flag is now set
 	 */
 	if (td_offload_overlap(td)) {
-		int res = pthread_mutex_unlock(&overlap_check);
+		int fio_unused res = pthread_mutex_unlock(&overlap_check);
 		assert(res == 0);
 	}
 
