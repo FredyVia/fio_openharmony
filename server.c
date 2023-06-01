@@ -2341,9 +2341,7 @@ void fio_server_send_add_job(struct thread_data *td)
 
 void fio_server_send_start(struct thread_data *td)
 {
-	struct sk_out *sk_out = pthread_getspecific(sk_out_key);
-
-	assert(sk_out->sk != -1);
+	assert(((struct sk_out *)pthread_getspecific(sk_out_key))->sk != -1);
 
 	fio_net_queue_cmd(FIO_NET_CMD_SERVER_START, NULL, 0, NULL, SK_F_SIMPLE);
 }
