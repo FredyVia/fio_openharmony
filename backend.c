@@ -1987,7 +1987,7 @@ static void *thread_main(void *data)
 	 */
 	if (td_offload_overlap(td)) {
 		int res;
-
+		
 		res = pthread_mutex_lock(&overlap_check);
 		if (res) {
 			td->error = errno;

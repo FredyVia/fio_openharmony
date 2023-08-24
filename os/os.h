@@ -24,7 +24,7 @@ enum {
 	os_windows,
 	os_android,
 	os_dragonfly,
-
+	os_liteos_a,
 	os_nr,
 };
 
@@ -53,6 +53,8 @@ typedef enum {
 #include "os-windows.h"
 #elif defined (__DragonFly__)
 #include "os-dragonfly.h"
+#elif defined(__LITEOS_A__)
+#include "os-liteos-a.h"
 #else
 #error "unsupported os"
 #endif

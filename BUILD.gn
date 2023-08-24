@@ -1,0 +1,134 @@
+import("//build/lite/config/component/lite_component.gni")
+
+fio_sources = [
+
+  "//third_party/fio/fio.c",
+  "//third_party/fio/crc/crc16.c",
+  "//third_party/fio/crc/crc32.c",
+  "//third_party/fio/crc/crc32c-arm64.c",
+  "//third_party/fio/crc/crc32c-intel.c",
+  "//third_party/fio/crc/crc32c.c",
+  "//third_party/fio/crc/crc64.c",
+  "//third_party/fio/crc/crc7.c",
+  "//third_party/fio/crc/fnv.c",
+  "//third_party/fio/crc/md5.c",
+  "//third_party/fio/crc/murmur3.c",
+  "//third_party/fio/crc/sha1.c",
+  "//third_party/fio/crc/sha256.c",
+  "//third_party/fio/crc/sha3.c",
+  "//third_party/fio/crc/sha512.c",
+  "//third_party/fio/crc/test.c",
+  "//third_party/fio/crc/xxhash.c",
+  "//third_party/fio/lib/axmap.c",
+  "//third_party/fio/lib/bloom.c",
+  "//third_party/fio/lib/flist_sort.c",
+  "//third_party/fio/lib/gauss.c",
+  "//third_party/fio/lib/getrusage.c",
+  "//third_party/fio/lib/hweight.c",
+  "//third_party/fio/lib/ieee754.c",
+  "//third_party/fio/lib/lfsr.c",
+  "//third_party/fio/lib/memalign.c",
+  "//third_party/fio/lib/memcpy.c",
+  "//third_party/fio/lib/mountcheck.c",
+  "//third_party/fio/lib/num2str.c",
+  "//third_party/fio/lib/output_buffer.c",
+  "//third_party/fio/lib/pattern.c",
+  "//third_party/fio/lib/prio_tree.c",
+  "//third_party/fio/lib/rand.c",
+  "//third_party/fio/lib/rbtree.c",
+  "//third_party/fio/lib/strntol.c",
+  "//third_party/fio/lib/zipf.c",
+  "//third_party/fio/gettime.c",
+  "//third_party/fio/ioengines.c",
+  "//third_party/fio/init.c",
+  "//third_party/fio/stat.c",
+  "//third_party/fio/log.c",
+  "//third_party/fio/time.c",
+  "//third_party/fio/filesetup.c",
+  "//third_party/fio/eta.c",
+  "//third_party/fio/verify.c",
+  "//third_party/fio/memory.c",
+  "//third_party/fio/io_u.c",
+  "//third_party/fio/parse.c",
+  "//third_party/fio/fio_sem.c",
+  "//third_party/fio/rwlock.c",
+  "//third_party/fio/pshared.c",
+  "//third_party/fio/options.c",
+  "//third_party/fio/smalloc.c",
+  "//third_party/fio/filehash.c",
+  "//third_party/fio/profile.c",
+  "//third_party/fio/debug.c",
+  "//third_party/fio/engines/cpu.c",
+  "//third_party/fio/engines/mmap.c",
+  "//third_party/fio/engines/sync.c",
+  "//third_party/fio/engines/null.c",
+  "//third_party/fio/engines/ftruncate.c",
+  "//third_party/fio/engines/fileoperations.c",
+  "//third_party/fio/engines/exec.c",
+  "//third_party/fio/server.c",
+  "//third_party/fio/client.c",
+  "//third_party/fio/iolog.c",
+  "//third_party/fio/backend.c",
+  "//third_party/fio/libfio.c",
+  "//third_party/fio/flow.c",
+  "//third_party/fio/cconv.c",
+  "//third_party/fio/gettime-thread.c",
+  "//third_party/fio/helpers.c",
+  "//third_party/fio/json.c",
+  "//third_party/fio/idletime.c",
+  "//third_party/fio/td_error.c",
+  "//third_party/fio/profiles/tiobench.c",
+  "//third_party/fio/profiles/act.c",
+  "//third_party/fio/io_u_queue.c",
+  "//third_party/fio/filelock.c",
+  "//third_party/fio/workqueue.c",
+  "//third_party/fio/rate-submit.c",
+  "//third_party/fio/optgroup.c",
+  "//third_party/fio/helper_thread.c",
+  "//third_party/fio/steadystate.c",
+  "//third_party/fio/zone-dist.c",
+  "//third_party/fio/zbd.c",
+  "//third_party/fio/dedupe.c",
+  "//third_party/fio/fdp.c",
+  "//third_party/fio/engines/falloc.c",
+  "//third_party/fio/oslib/asprintf.c",
+  "//third_party/fio/oslib/strlcat.c",
+  "//third_party/fio/fifo.c",
+  "//third_party/fio/trim.c",
+  "//third_party/fio/oslib/linux-dev-lookup.c",
+  "//third_party/fio/oslib/statx.c"
+]
+
+
+executable("fio") {
+  sources = fio_sources
+
+  include_dirs = [
+    "."
+  ]
+  
+  ldflags = [
+    "-lm",       # -lm
+    "-lpthread", # -lpthread  
+    "-ldl",      # -ldl
+  ]
+  
+  cflags = [
+    "-DBITS_PER_LONG=32",
+    "-D_FILE_OFFSET_BITS=64",
+    "-DFIO_INTERNAL",
+    "-DCONFIG_SEED_BUCKETS=4",
+    "-DCONFIG_HAVE_BOOL",
+    "-DCONFIG_STATIC_ASSERT",
+    "-DCONFIG_CLOCK_GETTIME",
+    "-DCONFIG_LITTLE_ENDIAN",
+    "-DCONFIG_PTHREAD_GETAFFINITY",
+    "-DFIO_VERSION=\"fio-3.35-3-g4820-clean\"",
+    "-DCONFIG_ZLIB",
+    "-DCONFIG_PWRITEV",
+    "-DCONFIG_SCHED_IDLE"
+  ]
+  deps = [
+    "//third_party/zlib:libz",
+  ]
+}
